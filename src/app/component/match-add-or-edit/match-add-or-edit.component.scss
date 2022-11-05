@@ -1,0 +1,284 @@
+.fnt_18{
+  font-size: 18px;
+}
+
+// mat expension start
+.mat-expansion-panel{
+  background: #383D67;
+  border-radius: 10px;
+  }
+  .mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+  border-radius: 0;
+  background: #2d325a;
+  box-shadow: none;
+  }
+
+  .mat-expansion-panel-header-title {
+  color: white;
+  }
+  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description{
+  align-items: center;
+  }
+
+  ::ng-deep .mat-expansion-panel-header-description {
+  color: rgb(255 255 255);
+  }
+  ::ng-deep .mat-expansion-indicator::after {
+  color: rgb(255 255 255);
+  }
+  ::ng-deep .mat-tab-header-pagination-chevron {
+  border-color: rgb(255 255 255);
+  }
+  ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+  border-color: rgb(255 255 255);
+  }
+  .mat_act {
+  position: relative;
+  margin-bottom: 10px;
+  }
+  ::ng-deep .mat_act.mat-expanded:before {
+    content: "";
+    width: 81%;
+    position: absolute;
+    bottom: -10px;
+    left: 24px;
+    /* width: 93%; */
+    padding: 0 24px;
+    background: rgba(255, 255, 255, 0.3215686275);
+    height: 1px;
+  }
+  .ply_accdn{
+  // min-height: 55px;
+  margin: 10px 0px;
+  }
+
+
+  ::ng-deep .mat-tab-label-active {
+  border-radius: 0;
+  }
+
+  // mat expension end
+
+
+  //details start
+  .trdng_plr {
+    background: #2d325a;
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+
+  .trdng_plr_match{
+    background: #2d325a;
+    padding: 40px;
+    border-radius: 20px;
+  }
+
+  .w-personal-info li {
+    margin-bottom: 22px;
+    display: flex;
+  }
+
+
+  .w-personal-info li .title {
+    color: #5c617e;
+    font-weight: 500;
+    margin-right: 30px;
+    float: left;
+    width: 25%;
+    font-size: 16px;
+  }
+
+  .w-personal-info li .text {
+    color: #fff;
+    width: 65%;
+    font-size: 16px;
+  }
+  //details send
+
+  .example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+
+
+// dropdown start
+  ::ng-deep .p-dropdown .p-dropdown-label {
+    background: #2d325a;
+    border: 0 none;
+    color: #D0D0D0;
+}
+
+::ng-deep .p-dropdown .p-dropdown-trigger {
+    background: #2d325a;
+    color: #D0D0D0;
+    width: 3rem;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+::ng-deep .p-dropdown {
+    background: transparent;
+}
+
+::ng-deep .p-dropdown-label{
+font-size: 14px;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight{
+  font-size: 14px;
+}
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+  font-size: 14px;
+}
+// dropdown end
+
+
+::ng-deep .p-listbox{
+  //background: #2d325a;
+  background: #2d325a;
+}
+
+::ng-deep .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
+  color: #5c617e;
+  background: #2d325a;
+}
+
+::ng-deep .p-listbox .p-listbox-list .p-listbox-item{
+  color: #5c617e;
+}
+::ng-deep .p-checkbox .p-checkbox-box.p-highlight{
+  border-color: #ff0882;
+  background: #ff0882;
+}
+::ng-deep .p-listbox .p-listbox-header{
+  background: #2d325a;
+}
+::ng-deep .p-datatable .p-datatable-tbody > tr{
+  background: #383d67;
+  color: white;
+}
+::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+  border-radius: 16px;
+  border: none;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:focus{
+  outline: none;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr.p-highlight {
+  background: #ff0882;
+  color: white;
+}
+::ng-deep .p-inputtext{
+  color: white;
+  background: #383d67;
+  height: 40px;
+}
+
+::ng-deep .p-listbox .p-listbox-header .p-listbox-filter-icon {
+  color: white;
+}
+
+::ng-deep .p-listbox{
+  border: none;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+
+::ng-deep .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled):hover {
+    color: white;
+    background: #383d67;
+}
+
+::ng-deep .p-listbox .p-listbox-list .p-listbox-item:focus{
+  box-shadow: none;
+}
+
+::ng-deep .p-listbox .p-listbox-list .p-listbox-item-group{
+  background: #383d67;
+  color: white;
+  border-radius: 10px;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th{
+  color: white;
+  background: transparent;
+}
+
+.btn-cstm{
+  background: #ff0882;
+  border: #ff0882;
+  color: white;
+}
+.btn-cstm:hover{
+  background: #ff0882;
+  border: #ff0882;
+  color: white;
+}
+.mr_20{
+  margin-right: 20px;
+}
+
+// bootstrap modal start
+.modal_close {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 15px;
+  z-index: 10;
+  cursor: pointer;
+}
+.cust_modal {
+  padding: 20px;
+}
+.modal-content {
+  background: #2d325a;
+  border-radius: 30px;
+  color: white;
+}
+
+.txt_input {
+  background: #383d67;
+  border: none;
+  height: 36px;
+  border-radius: 8px;
+  color: white;
+  padding-left: 10px;
+  font-size: 12px;
+}
+.custom-dropzone {
+  background: transparent;
+}
+.edt_btn {
+  cursor: pointer;
+}
+// bootstrap modal end
+.fnt_600{
+  font-weight: 600;
+}
+
+
+.left_home_hd {
+  text-align: left;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+.right_home_hd {
+  text-align: right;
+  font-size: 16px;
+}
+
+.pink_clr {
+  color: #ff0882;
+}
+
+.trdn_vwall {
+  padding: 0px 25px;
+}
+.scr_td{
+  background: transparent !important;
+}

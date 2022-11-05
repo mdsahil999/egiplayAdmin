@@ -1,0 +1,328 @@
+<div class="container">
+  <div class="row mt-5 mb-5" style="    padding: 0px 10px;">
+    <div class="trdng_plr">
+      <div class="row align-items-center">
+        <div class="col-md-2 color_white fnt_18">
+          Select Tournament
+        </div>
+        <div class="col-md-7">
+          <p-dropdown [options]="tournaments" [(ngModel)]="selectedTournament" placeholder="Select Tournament" optionLabel="name" (onChange)="tournamentChange($event)"></p-dropdown>
+          <!-- <p-dropdown [options]="tournaments" [(ngModel)]="selectedTournament"  optionLabel="name" optionValue="costCenter"></p-dropdown> -->
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+          <button class="btn btn-cstm" (click)="setStatus()">
+            Active
+           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="trdng_plr">
+        <div class="color_white fnt_18 mb-4 text-center" style="    margin-top: -15px;">Match List</div>
+        <p-scrollPanel [style]="{ width: '100%', height: '418px' }">
+          <p-table
+            #dt2
+            [value]="matches"
+            selectionMode="single"
+            [(selection)]="selectedMatch"
+            dataKey="id"
+            class="some-custom-class-name"
+            (onRowSelect)="onRowSelect($event)"
+            (onRowUnselect)="onRowUnselect($event)"
+            styleClass="ui-table-custom"
+          >
+            <ng-template pTemplate="body" let-product>
+              <tr [pSelectableRow]="product">
+                <td>
+                  <div style="display: flex">
+                    <div class="img-styl2"></div>
+                    <div style="margin-left: 15px;font-size: 12px;">
+                      {{ product.name }}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-scrollPanel>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <form>
+      <div class="trdng_plr">
+        <div class="row trdn_vwall mb-5">
+          <div class="col-sm-6">
+            <div class="float-left left_home_hd">Match Overview</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-right right_home_hd">
+              <a class="pink_clr ancharTagDecorator" (click)="editMatch(selectedMatch?.id)">Edit </a>
+            </div>
+          </div>
+        </div>
+          <ul class="widget w-personal-info mt-4" style="list-style-type: none" *ngIf="selectedMatch">
+            <li>
+              <span class="title">Name</span>
+              <span class="text">{{
+                selectedMatch.name ? selectedMatch.name : "&nbsp;"
+              }}</span>
+            </li>
+            <li>
+              <span class="title">Venue </span>
+              <span class="text">{{
+                selectedMatch.venue ? selectedMatch.venue : "&nbsp;"
+              }}</span>
+            </li>
+            <li>
+              <span class="title">Match Type</span>
+              <span class="text">{{
+                selectedMatch.match_type
+                  ? selectedMatch.match_type
+                  : "&nbsp;"
+              }}</span>
+            </li>
+
+            <li>
+              <span class="title">Start Date</span>
+              <span class="text">{{
+                selectedMatch.start_date
+                  ? (selectedMatch.start_date | date: 'longDate' )
+                  : "&nbsp;"
+              }}</span>
+            </li>
+
+          </ul>
+      </div>
+      <div class="mt-5" style="    background: #2d325a;
+      border-radius: 20px;padding: 20px;">
+        <div class="row trdn_vwall mb-4 pt-3">
+          <div class="col-sm-6">
+            <div class="float-left left_home_hd">Match Teams and Players</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-right right_home_hd">
+              <a class="pink_clr ancharTagDecorator" [class.disabled]="!isTournamentDisable" (click)="isTournamentDisable = false">Edit </a>
+            </div>
+          </div>
+        </div>
+        <p-listbox [options]="groupedCities" [group]="true" [(ngModel)]="selectedCountries" [metaKeySelection]="false"
+  [checkbox]="true" [filter]="true" [multiple]="true" [listStyle]="{'max-height':'250px'}" name="tournamentTeams" [disabled]="isTournamentDisable">
+  <ng-template let-group pTemplate="group">
+    <div class="p-d-flex p-ai-center">
+      <span>{{group.label}}</span>
+    </div>
+  </ng-template>
+</p-listbox>
+      </div>
+
+      <div class="row text-center mt-5">
+        <div class="col-md-12">
+          <button class="btn btn-cstm mr_20" (click)="showDialog()">
+           Save
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- <div>
+      <button class="btn btn-cstm mr_20" (click)="addKill()">add kill</button>
+    </div> -->
+      <div class="mt-4 trdng_plr_match mb-5">
+
+        <div class="row mb-5">
+          <div class="col-sm-6">
+            <div class="float-left left_home_hd">Match Scores</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-right right_home_hd">
+              <a class="pink_clr ancharTagDecorator" (click)="addKill()">Add </a>
+            </div>
+          </div>
+        </div>
+
+        <p-table [columns]="cols" [value]="products">
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of columns">
+                      {{col}}
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr class="scr_td">
+                  <td *ngFor="let col of columns">
+                      {{rowData[col]}}
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="profile"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="profileModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content cust_modal">
+      <div class="modal_close" data-dismiss="modal" aria-label="Close">
+        <!-- <img
+          src="/assets/images/icons/cross_white.png"
+          class="img-fluid"
+          width="100%"
+          alt=""
+        /> -->
+      </div>
+      <div class="modal-body">
+        <div data-dismiss="modal" aria-label="Close" class="modal_close" (click)="closePopup()">
+          <img
+            src="/assets/images/icons/cross_white.png"
+            width="100%"
+            alt=""
+            class="img-fluid"
+          />
+        </div>
+        <ng-container class="mb-2">
+          <div class="mb-4">
+            <span style="font-weight: 600; font-size: 18px" *ngIf="true"
+              >Add Kill details</span
+            >
+          </div>
+        </ng-container>
+       <div>
+        <app-dynamic-form #dynamicForm (saveEvent)="saveKill($event)" [columns]="columns"></app-dynamic-form>
+       </div>
+        <!-- <form #profileForm="ngForm" (ngSubmit)="profileSubmit(profileForm)">
+
+          <div class="form-group">
+            <li *ngFor="let column of columnData.data.columns;let indexOfelement=index;">
+              <div *ngIf="column.field == 'dropdown'">
+                <h4>{{indexOfelement}}</h4>
+              <h5>{{column.name}}</h5>
+              <p-dropdown name={{column.name}} [options]="getTournamentsValueTest()" [(ngModel)]="selectedTournament" (onChange)="tournamentChange($event)" optionLabel="name"></p-dropdown>
+              <div *ngIf="profileSubmitted && profileForm.invalid">
+                <span
+                  *ngIf="getValidation(column.name)"
+                  class="error_msg"
+                  >{{column.name}} is required</span
+                >
+              </div>
+              </div>
+
+              <div *ngIf="column.field == 'textbox'">
+                <h4>{{indexOfelement}}</h4>
+                <h5>{{column.name}}</h5>
+                <input type="text" name={{column.name}} [(ngModel)]="gender" pInputText required>
+                <div *ngIf="profileSubmitted && profileForm.invalid">
+                  {{getValidation(gender)}}
+                  <span
+                    *ngIf="!getValidation(gender)"
+                    class="error_msg"
+                    >{{column.name}} is required</span
+                  >
+                </div>
+              </div>
+
+            </li>
+          </div>
+
+
+          <div
+            class="form-group"
+            style="display: flex; justify-content: flex-end"
+          >
+            <div></div>
+            <div style="margin-left: 10px">
+              <button
+                type="submit"
+                style="
+                  background: #ff0882;
+                  color: white;
+                  width: 120px;
+
+                  font-size: 14px;
+                "
+                class="btn btn-block mb-2 mx-auto mt-3 sbm_btn"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form> -->
+      </div>
+    </div>
+  </div>
+  <!-- <p-toast position="bottom-left" key="bl"></p-toast> -->
+</div>
+
+<p-toast></p-toast>
+<p-dialog header="Selected Players" [(visible)]="display">
+  <div  *ngFor="let data of newselectedCountriesGroupBy">
+    <h6 class="fnt_600">Squad Name: {{data.squad_name}}</h6>
+    <h6 class="fnt_600">Team Name:  {{data.team_name}}</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Player Id</th>
+        <th>Player Name</th>
+        <th>Player Ign</th>
+        <th>Player Playing Flag</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let column of data?.players">
+      <tr>
+        <td>{{column?.player_id}}</td>
+        <td>{{column?.player_name}}</td>
+        <td>{{column?.player_ign}}</td>
+        <td>{{column?.player_playing_flag}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <ng-template pTemplate="footer">
+    <button type="button"  class="btn btn-cstm" (click)="display = false">Cancel</button>
+    <button type="button" class="btn btn-cstm" (click)="save()">Save</button>
+</ng-template>
+</p-dialog>
+<!-- <p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+  Content
+</p-confirmDialog> -->
+<!-- <p-confirmDialog  [style]="{width: '50vw'}">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</p-confirmDialog> -->
+
+<!-- <p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+  Content
+</p-confirmDialog> -->

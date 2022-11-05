@@ -1,0 +1,13 @@
+
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <img src="/assets/images/icons/logo.png" class="logo">
+  </ng-template>
+  <ng-template pTemplate="end">
+  <div class="d-flex">
+      <input type="text" [(ngModel)]="loginToken" pInputText placeholder="Login Token" [disabled]="getLoginToken() ? true : false">
+      <button type="button" *ngIf="!getLoginToken()" (click)="login()" class="btn btn-cstm" icon="pi pi-power-off" style="margin-left:.25em;margin-right: 30px;">Login</button>
+      <button type="button"  *ngIf="getLoginToken()" (click)="logout()" class="btn btn-cstm" icon="pi pi-power-off" style="margin-left:.25em;margin-right: 30px;">Logout</button>
+  </div>
+</ng-template>
+</p-menubar>

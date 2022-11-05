@@ -1,0 +1,256 @@
+<div class="container mt-5 mb-5">
+  <form>
+    <!-- <div class="mb-5" style="font-size: 30px;
+    font-weight: 600;
+    color: white;
+    text-align: center;">Tournaments</div> -->
+  <div class="row">
+    <div class="filter_player">
+      <div class="radio_ul" *ngFor="let template of chartArr; let i = index">
+        <div class="radio_li">
+          <div class="">
+            <input
+              type="radio"
+              name="used_by_single_user"
+              id="radio{{ i }}"
+              [value]="template.name"
+              [(ngModel)]="templateTypeSelected"
+              (click)="getDataByTemplate(template, i)"
+            />
+            <label for="radio{{ i }}" class="back_shadow">
+              <div class="total_ref">
+                <div class="ref_img">
+                  <img
+                    [src]="getSrc(template.url,template.name)"
+                    [ngClass]="getClassName(template.url)"
+                  />
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="trdng_plr">
+        <div class="color_white fnt_18 mb-4 text-center d-flex" style="    margin-top: -15px;">
+          <div class="col-md-6">Tournament List</div>
+          <div class="col-md-6 right_home_hd tournamentAddBtn" (click)="addTournament()">Add</div>
+        </div>
+        <p-scrollPanel [style]="{ width: '100%', height: '418px' }">
+          <p-table
+            #dt2
+            [value]="tournaments"
+            selectionMode="single"
+            [(selection)]="selectedTournament"
+            dataKey="id"
+            class="some-custom-class-name"
+            (onRowSelect)="onRowSelect($event)"
+            (onRowUnselect)="onRowUnselect($event)"
+            styleClass="ui-table-custom"
+          >
+            <ng-template pTemplate="body" let-product>
+              <tr [pSelectableRow]="product">
+                <td>
+                  <div style="display: flex">
+                    <div class="img-styl2"></div>
+                    <div style="margin-left: 15px;font-size: 12px;">
+                      {{ product.name }}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-scrollPanel>
+        <!-- <p-accordion>
+        <p-accordionTab header="Header 1">
+           Content 1
+        </p-accordionTab>
+        <p-accordionTab header="Header 2">
+            Content 2
+        </p-accordionTab>
+        <p-accordionTab header="Header 3">
+            Content 3
+        </p-accordionTab>
+    </p-accordion> -->
+        <!-- <mat-expansion-panel
+      (opened)="panelOpen(squad?.name)"
+      (closed)="panelOpenState = false"
+      *ngFor="let squad of sampleData"
+    >
+      <mat-expansion-panel-header class="mat_act">
+        <mat-panel-title>
+          {{ squad?.name }}
+        </mat-panel-title>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="mb-3 ply_accdn" *ngFor="let player of squad?.players">
+        <span> </span>
+        <span style="color: #d0d0d0">{{ player?.name }}</span>
+      </div>
+    </mat-expansion-panel> -->
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="trdng_plr">
+        <div class="row trdn_vwall mb-5">
+          <div class="col-sm-6">
+            <div class="float-left left_home_hd">Tournament Overview</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-right right_home_hd">
+              <a class="pink_clr ancharTagDecorator" (click)="editTournament(selectedTournament?.id)">Edit </a>
+            </div>
+          </div>
+        </div>
+        <ul class="widget w-personal-info mt-4" style="list-style-type: none" *ngIf="selectedTournament">
+          <li>
+            <span class="title">Name</span>
+            <span class="text">{{
+              selectedTournament.name ? selectedTournament.name : "&nbsp;"
+            }}</span>
+          </li>
+          <li>
+            <span class="title">Venue </span>
+            <span class="text">{{
+              selectedTournament.venue ? selectedTournament.venue : "&nbsp;"
+            }}</span>
+          </li>
+          <li>
+            <span class="title">Game Type</span>
+            <span class="text">{{
+              selectedTournament.game_type
+                ? selectedTournament.game_type
+                : "&nbsp;"
+            }}</span>
+          </li>
+
+          <li>
+            <span class="title">Organizer</span>
+            <span class="text">{{
+              selectedTournament.Organizer
+                ? selectedTournament.Organizer
+                : "&nbsp;"
+            }}</span>
+          </li>
+
+          <li>
+            <span class="title">Prize Pool</span>
+            <span class="text">{{
+              selectedTournament.prize_pool
+                ? selectedTournament.prize_pool
+                : "&nbsp;"
+            }}</span>
+          </li>
+          <li>
+            <span class="title">Caster</span>
+            <span class="text">{{
+              selectedTournament.caster ? selectedTournament.caster : "&nbsp;"
+            }}</span>
+          </li>
+          <li>
+            <span class="title">Total Squads</span>
+            <span class="text">{{
+              selectedTournament.total_squads ? selectedTournament.total_squads : "&nbsp;"
+            }}</span>
+          </li>
+          <li>
+            <span class="title">Description</span>
+            <span class="text">
+              <p>
+                {{
+                  selectedTournament.description
+                    ? selectedTournament.description.slice(0, 250)
+                    : "&nbsp;"
+                }}
+                <span id="dots" *ngIf="selectedTournament.description.length > 250"
+                  >...</span
+                >
+                <span id="more">
+                  {{
+                    selectedTournament.description
+                      ? selectedTournament.description.slice(250)
+                      : "&nbsp;"
+                  }}</span
+                >
+              </p>
+              <button
+                class="btn shw_mr"
+                id="BtnlessMore"
+                *ngIf="selectedTournament.description.length > 250"
+              >
+                Show more
+              </button>
+            </span>
+          </li>
+          <li>
+            <span class="title">Start Date</span>
+            <span class="text">{{
+              selectedTournament.start_date ? (selectedTournament.start_date | date: 'longDate') : "&nbsp;"
+            }}</span>
+          </li>
+          <li>
+            <span class="title">End date</span>
+            <span class="text">{{
+              selectedTournament.end_date ? (selectedTournament.end_date| date: 'longDate') : "&nbsp;"
+            }}</span>
+          </li>
+        </ul>
+      </div>
+      <!-- <div class="trdng_plr">
+        <ng-multiselect-dropdown
+          [placeholder]="'custom placeholder'"
+          [settings]="dropdownSettings"
+          [data]="tournamentTeams"
+          [(ngModel)]="selectedTournamentTeams"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div> -->
+      <div class="mt-5" style="    background: #2d325a;
+      border-radius: 20px; padding: 20px;">
+        <div class="row trdn_vwall mb-4 pt-3">
+          <div class="col-sm-6">
+            <div class="float-left left_home_hd">Tournament Teams</div>
+          </div>
+          <div class="col-sm-6">
+            <div class="float-right right_home_hd">
+              <a class="pink_clr ancharTagDecorator" [class.disabled]="!isTournamentDisable" (click)="isTournamentDisable = false">Edit </a>
+            </div>
+          </div>
+        </div>
+        <p-listbox
+          [options]="tournamentTeams"
+          [(ngModel)]="selectedTournamentTeams"
+          [metaKeySelection]="false"
+          [checkbox]="true"
+          [filter]="true"
+          [multiple]="true"
+          optionLabel="team_name"
+          [listStyle]="{ 'max-height': '250px' }"
+          name="tournamentTeams"
+          [disabled]="isTournamentDisable"
+        >
+          <ng-template let-country pTemplate="item">
+            <div class="country-item">
+              <div>{{ country.team_name }} - {{country.squad_name}}</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+      <div class="row text-center mt-5">
+        <div class="col-md-12">
+          <button class="btn btn-cstm mr_20" (click)="save()">
+           Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+<p-toast></p-toast>

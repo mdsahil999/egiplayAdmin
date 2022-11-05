@@ -1,0 +1,53 @@
+<form #form="ngForm" (ngSubmit)="profileSubmit(form)">
+  <ng-container *ngFor="let control of columns">
+
+      <div *ngIf="control.field === 'textbox'" class="mb-4">
+        <h5>{{control.name}}</h5>
+        <input type="text" [name]="control.name"  ngModel
+        [id]="control.name" >
+        <!-- <div *ngIf="form.invalid">
+          <span
+            *ngIf="form.get(control.name)?.errors?.['required']"
+            class="error_msg"
+            >{{control.name}} is required</span
+          >
+        </div> -->
+      </div>
+
+      <div *ngIf="control.field ==='dropdown'" class="mb-4">
+        <h5>{{control.name}}</h5>
+        <p-dropdown [options]="control.option" [name]="control.name" [filter]="true"
+        [id]="control.name" optionLabel="player_playing__name" ngModel></p-dropdown>
+        <!-- <div *ngIf="form.invalid">
+          <span
+            *ngIf="form.get(control.name)?.errors?.['required']"
+            class="error_msg"
+            >{{control.name}} is required</span
+          >
+        </div> -->
+      </div>
+
+    </ng-container>
+
+    <div
+    class="form-group"
+    style="display: flex; justify-content: flex-end"
+  >
+    <div></div>
+    <div style="margin-left: 10px">
+      <button
+        type="submit"
+        style="
+          background: #ff0882;
+          color: white;
+          width: 120px;
+
+          font-size: 14px;
+        "
+        class="btn btn-block mb-2 mx-auto mt-3 sbm_btn"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

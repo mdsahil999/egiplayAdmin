@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Poppins_Regular';
+  src: url('/assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+* {
+  // font-family: Poppins_Regular;
+  font-family: "Poppins", sans-serif;
+ // color: white;
+}
+body{
+  background-color: #1e223f !important;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden !important;
+}
+.color_white{
+  color: white;
+}
+.ancharTagDecorator{
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-cstm{
+  background: #ff0882;
+  border: #ff0882;
+  color: white;
+}
+.btn-cstm:hover{
+  background: #ff0882 !important;
+  border: #ff0882;
+  color: white !important;
+}
+
+.fnt_18 {
+  font-size: 18px;
+}
